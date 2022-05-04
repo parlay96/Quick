@@ -1,0 +1,25 @@
+编译器将源代码翻译为目标代码的过程叫做编译（compiler）
+
+// 源代码
+<template>
+   <div @click="clickChange">
+      你好呀，鱼泡
+   </div>
+</template>
+
+// 目标代码
+function render () {
+  return h('div', {onClick: clickChange }, '你好呀，鱼泡')
+}
+
+如：
+<div>
+    <h1>这是compiler</h1>  
+	 <p v-if="message">{{ message }}</p>
+	 <p v-else>No messageq.</p>
+</div>
+
+{return _c('div',[_c('h1',[_v("这是compiler")]),(message)?_c('p',[_v(_s(message))]):_c('p',[_v("No messageq.")])])}
+
+
+模板 -> 词法分析 -> 语法分析 -> 模板AST -> Transformer -> jsAST -> 代码生成

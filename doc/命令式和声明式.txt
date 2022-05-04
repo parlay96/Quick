@@ -1,0 +1,40 @@
+1. ⭐早期流行的JQuery就是典型的命令式框架。命令式的一大特点就是“关注过程”，例如：
+ $("#app")
+  .text("hello world")
+  .on('click', () => { console.log('点我干嘛')  }) !!!!
+ 
+2. ⭐如果你没有用过JQ?  在看看原生
+ var div = document.querySelector("#app")
+ div.innerHTML = 'hello world'
+ div.addEventListener('click', () => { console.log('点我干嘛') }) !!!!
+
+
+3. ⭐声明式：更加关注结果。比如vue: 比如要描述上面的这个东西==>》》
+ <div @click="() => console.log('点我干嘛')">hello world</div>
+ 可以看出，我们提供一个"结果"，至于如何实现这个"结果"！我们不关心！！！
+ 因此：我们可以看出Vue的内部实现命令式。而给用户看见的式声明式的！！！
+
+
+4. ⭐ 引发的争议：命令式 和 声明式谁的性能更好？
+ 1. 假设现在我们将div标签的内容修改为 "hello yupao"!!!  那么命令式就是： div.textContent = 'hello yupao'
+
+ 2. 声明式：<div @click="() => console.log('点我干嘛')">hello yupao</div>
+
+对于框架来说：它需要找到前后的差异，并只更新变化的地方！但是它最终完成更新的代码任然是： div.textContent = 'hello yupao'
+
+如何我们吧直接修改的性能消耗定义为A, 找出差异的性能消耗定义为B, 那么
+1. 命令式的代码更新 = A
+2. 声明式代码更新 = B + A
+
+可以看出：⭐ 声明式的代码性能 不优于 命令式代码的性能 ！！！
+
+ 1. 那为啥还要用vue呢? 命令式代码维护性不高，太多的dom操作等代码！
+但是声明式，只是展示我们的结果！更加直观！！
+
+⭐ 而框架设计者要做的就是：在保持可维护性的同时让性能损失最小
+
+
+
+
+
+

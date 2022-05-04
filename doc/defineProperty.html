@@ -1,0 +1,49 @@
+<!--
+ * @Author: penglei
+ * @Date: 2022-05-04 11:42:46
+ * @LastEditors: penglei
+ * @LastEditTime: 2022-05-04 11:42:50
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function vue() {
+        var data = {
+            _year: 2004,
+            _edition: 1
+        }
+        // 遍历data中的所有属性
+        Object.keys(data).forEach(key => {
+            // 把data的属性注入到vue实例中
+            Object.defineProperty(this, key, {
+                enumerable: true,
+                configurable: true,
+                get() {
+                    return data[key]
+                },
+                set(newValue) {
+                    if (newValue === data[key]) {
+                        return
+                    }
+                    data[key] = newValue
+                }
+            })
+        })
+        console.log(this._year)
+    }
+    vue()
+</script>
+
+</html>

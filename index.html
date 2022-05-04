@@ -1,0 +1,77 @@
+<!--
+ * @Author: penglei
+ * @Date: 2022-05-03 13:45:45
+ * @LastEditors: penglei
+ * @LastEditTime: 2022-05-04 18:24:07
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你好, Quick</title>
+    <style>
+        body {
+            padding: 0 50px;
+        }
+
+        input {
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .15);
+            padding-left: 20px;
+            font-size: 24px;
+            width: 300px;
+            height: 50px;
+        }
+
+        p {
+            font-size: 28px;
+        }
+
+        .btn {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p class="msg" v-text="message"></p>
+        <p class="msg" v-html="price"></p>
+        <input v-model="title" />
+        <p>{{ title }}</p>
+        <p>num值：{{ num }}</p>
+        <div>
+            <input v-model="num" />
+            <input v-model="message" />
+        </div>
+        <button class="btn" v-on:click="click">add 1</button>
+    </div>
+</body>
+<script src="./lib/index.js"></script>
+<script>
+    new Quick({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            title: '鱼泡',
+            price: '<span style="color:red">100</span>',
+            num: 0
+        },
+        created: function () {
+            setTimeout(() => {
+                this.title = '你好，鱼泡！！！'
+            }, 2000)
+        },
+        methods: {
+            click(e) {
+                this.num += 1
+            }
+        }
+    })
+</script>
+
+</html>

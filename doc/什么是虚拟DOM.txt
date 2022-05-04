@@ -1,0 +1,84 @@
+1. 我们刚刚在讲声明式代码的更新性能消耗 = 直接修改的性能消耗 + 差异的性能消耗
+   虚拟dom，为了“最小化”找出差异的性能消耗 而 出来的！！！
+
+2. 什么是虚拟dom(virtual DOM)？ 用普通js对象来描述DOM的方式！！！
+
+1. 再写vue的时候？
+import { h } from "vue"
+// 第一种通过h函数描述UI
+export default {
+    render () {
+        return h('h1', {onClick: clickChange }, '你好呀，鱼泡') // 虚拟dom  h函数就是一个创建虚拟dom的工具
+    }
+}
+
+// 第二种：模板创建 template 通过一个（vue-loader解析）
+<template>
+   <div @click="clickChange">
+      你好呀，鱼泡
+   </div>
+</template>
+
+<script>
+  export default {
+      data() {}
+  }
+</script>
+
+1. 其中 template的模板内容，在编译器会把模板内容编译成渲染函数，并添加到script标签上
+render () {
+  return h('div', {onClick: clickChange }, '你好呀，鱼泡') // 虚拟dom  h函数就是一个创建虚拟dom的工具
+ }
+
+ 1. ⭐然后渲染器再把渲染函数返回的虚拟DOM，渲染为真实的DOM
+
+
+
+
+
+
+如下虚拟的DOM:
+var virtualNode = {
+  tag: 'div',
+  props: {
+      onClick:() => console.log('点我, 干嘛！！！')
+  },
+  children: '你好呀，鱼泡'
+}
+
+接下来：我们需要写一个渲染器，把上面的虚拟DOM转换为真实的DOM
+
+function renderer (vnode, container) {
+   // 使用 tag作为标签名创建一个dom元素
+   const el = document.createElement(vnode.tag)
+   // 遍历props，将事件添加到DOM元素上
+   for (const key in vnode.props) {
+     if (/^on/.test(key)) {
+        // 如果key是on开头，说明它是个事件
+        el.addEventListener(
+            // 截取字符，吧on去掉！然后转为小写！！！
+            key.substr(2).toLowerCase(), // 事件名称 onClick 转为 click
+            vnode.props[key]
+        )
+     }
+   }
+   
+  // 处理children
+  if (typeof vnode.children === 'string') {
+    // 说明他是文本的子节点！！！
+    const textnode = document.createTextNode(vnode.children)
+    el.appendChild(textnode)
+  } else if (Array.isArray(vnode.children)) {
+    // 代表有子节点，递归调用渲染函数
+    vnode.children.forEach(child => renderer(child, el))
+  }
+  // 将元素挂在到容器下
+  container.appendChild(el)
+}   
+
+
+// 别忘了我们现在所做的还仅仅是创建节点。渲染器的精髓是在更新节点的。比如我们修改了vnode，
+
+对于渲染器来说。他需要精确的找到vnode对象来更新内容！而不是在完整的创建元素的流程！
+
+  
