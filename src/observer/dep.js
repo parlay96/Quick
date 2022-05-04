@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-04 09:59:39
  * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 15:33:51
+ * @LastEditTime: 2022-05-04 22:03:46
  * @Description: dep是订阅器|收集者 负责存放watcher
  */
 import { remove } from '@/utils'

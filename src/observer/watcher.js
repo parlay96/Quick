@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-04 12:09:35
  * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 15:17:22
+ * @LastEditTime: 2022-05-04 22:02:37
  * @Description: 
  */
 import { pushTarget, popTarget } from './dep'
@@ -21,6 +21,7 @@ export default class Watcher {
     }
     // 获取实例上对应的老值
     get() {
+        // 顺序不能乱！！！
         // 在利用get获取数据时调用pushTarget()方法，先把当前观察者挂载
         pushTarget(this)
         let value = this.vm[this.key]

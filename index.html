@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-03 13:45:45
  * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 18:24:07
+ * @LastEditTime: 2022-05-04 22:44:54
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -16,6 +16,12 @@
     <style>
         body {
             padding: 0 50px;
+        }
+
+        .text {
+            padding-top: 15px;
+            font-size: 18px;
+            color: #2a5caa;
         }
 
         input {
@@ -41,34 +47,45 @@
     <div id="app">
         <p class="msg" v-text="message"></p>
         <p class="msg" v-html="price"></p>
-        <input v-model="title" />
-        <p>{{ title }}</p>
-        <p>num值：{{ num }}</p>
+        <p>
+            <span v-bind:title="Tips">
+                鼠标悬停几秒钟查看此处动态绑定的提示信息！
+            </span>
+        </p>
         <div>
-            <input v-model="num" />
-            <input v-model="message" />
+            <input v-model="title" type="number" />
+            <li class="text"><span>请输入内容我会变化：{{ title }}</span></li>
         </div>
+        <p>num值： {{ num }} ----拼接上： {{ content }} -----</p>
         <button class="btn" v-on:click="click">add 1</button>
+        <button class="btn" @click="clickTwo">add 2</button>
     </div>
 </body>
 <script src="./lib/index.js"></script>
 <script>
     new Quick({
         el: '#app',
-        data: {
-            message: 'Hello Vue!',
-            title: '鱼泡',
-            price: '<span style="color:red">100</span>',
-            num: 0
+        data: function () {
+            return {
+                message: 'Hello Vue !!!',
+                title: '100000',
+                Tips: '页面加载于 ' + new Date().toLocaleString(),
+                content: '鱼泡牛B ！！！',
+                price: `<span style="color:red">价格￥100</span>`,
+                num: 0
+            }
         },
         created: function () {
             setTimeout(() => {
-                this.title = '你好，鱼泡！！！'
-            }, 2000)
+                this.message = '欢迎你的到来！！！'
+            }, 3000)
         },
         methods: {
             click(e) {
                 this.num += 1
+            },
+            clickTwo(e) {
+                this.num += 2
             }
         }
     })
