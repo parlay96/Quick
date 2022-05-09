@@ -1,8 +1,8 @@
 /*
  * @Author: penglei
  * @Date: 2022-05-04 08:27:23
- * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 22:03:35
+ * @LastEditors: pengLei
+ * @LastEditTime: 2022-05-09 10:18:23
  * @Description: 
  */
 import Dep from "./dep"
@@ -42,6 +42,11 @@ export class Observer {
  * 每一个数据都添加响应式对象， 浏览所有属性并将其转换为 getter/setters!!!
  */
 export function defineReactive(obj, key, val) {
+    // 每个响应式属性都有dep，
+    // dep存放了依赖这个属性的watcher，watcher是观测数据变化的函数，如果数据发生变化，dep就会通知所有的观察者watcher去调用更新方法!!!
+    // 因此观察者需要被目标对象收集，目的是通知依赖它的所有观察者。
+    // 那为什么watcher也要存放dep呢？是因为当前正在执行的watcher需要知道此时是哪个dep通知了自己
+
     const dep = new Dep()
     // 指定对象的自身属性描述符
     const property = Object.getOwnPropertyDescriptor(obj, key)
@@ -63,7 +68,7 @@ export function defineReactive(obj, key, val) {
         set: function reactiveSetter(newVal) {
             // 如何新的值和就的值一样，直接返回
             if (newVal === val || (newVal !== newVal && val !== val)) return
-            val = newVal
+            val = newVal // 设置新值
             // newValue也有可能是对象，所以递归
             observe(newVal)
             // 通知Dep类

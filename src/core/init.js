@@ -1,8 +1,8 @@
 /*
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
- * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 22:12:45
+ * @LastEditors: pengLei
+ * @LastEditTime: 2022-05-09 10:18:05
  * @Description: 核心
  */
 import { observe } from "@/observer"
@@ -72,10 +72,12 @@ function initMethods(vm, methods) {
 function proxy(target, sourceKey, key) {
     // 绑定get方法
     sharedPropertyDefinition.get = function proxyGetter() {
+        // 调用这个将触发defineReactive方法里面的_data劫持
         return this[sourceKey][key]
     }
     // 绑定set方法
     sharedPropertyDefinition.set = function proxySetter(val) {
+        // 调用这个将触发defineReactive方法里面的_data劫持
         this[sourceKey][key] = val
     }
     Object.defineProperty(target, key, sharedPropertyDefinition)

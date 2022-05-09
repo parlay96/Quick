@@ -1,8 +1,8 @@
 <!--
  * @Author: penglei
  * @Date: 2022-05-04 11:42:46
- * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 11:42:50
+ * @LastEditors: pengLei
+ * @LastEditTime: 2022-05-09 10:25:27
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -12,17 +12,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>defineProperty</title>
 </head>
 
 <body>
 
 </body>
 <script>
+    // 先去理解这个东西！！！
     function vue() {
         var data = {
             _year: 2004,
-            _edition: 1
+            _name: '张三'
         }
         // 遍历data中的所有属性
         Object.keys(data).forEach(key => {
@@ -42,6 +43,8 @@
             })
         })
         console.log(this._year)
+        this._name = '李四'
+        console.log(this._name)
     }
     vue()
 </script>

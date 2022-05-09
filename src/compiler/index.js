@@ -2,8 +2,8 @@
 /*
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
- * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 22:40:24
+ * @LastEditors: pengLei
+ * @LastEditTime: 2022-05-09 10:50:24
  * @Description: 核心
  */
 import { isTextNode, isElementNode, isDirective, isEvent, isBind } from "@/utils"
@@ -17,8 +17,27 @@ export default class Compiler {
         this.vm = vm
         this.createCompiler(this.el)
     }
+    // 1. 模拟处理模板。真实的vue源码不是这样干的！！！
+    // 真实情况，是通过mount-phase执行一个_update 。然后_update接受一个_render方法（就是获取虚拟dom）参数！！！
+    // 2. _update方法在里面执行一个patch方法。patch方法接受一个_render方法（就是获取虚拟dom）参数，吧虚拟的dom转为真实dom
+    // 3. patch（打补丁）里面做了diff算法
+    // (1) 根元素改变 – 删除当前DOM树重新建!!
+    // (2) 根元素未变, 子元素/内容改变!!
+    // (3) 无key – 就地更新 / 有key – 按key比较!!
+
+    // 3.5 利用diff算法，找出不同，然后更新变化的部分重绘到页面，也叫做打补丁!!
+    
+    // 3.6 重绘和回流的概念
+        // 回流(重排): 当浏览器必须重新处理和绘制部分或全部页面时，回流就会发生。
+        // 重绘: 不影响布局, 只是标签页面发生变化, 重新绘制。
+        // 注意: 回流(重排)必引发重绘, 重绘不一定引发回流(重排)。
+
+    // 4. _render方法的来历呢，就是每个组件里面的options对象的render方法，它是一个渲染函数，渲染函数返回一个虚拟dom！！！
+
+    // mount-phase ： 利用虚拟dom创建视图页面html
+    // patch-phase：数据模型一旦变化渲染函数将再次被调用生成新的虚拟dom，然后做dom diff更新视图html
+
     // 编译模板，处理文本节点和元素节点！！！
-    // 模拟处理模板。真实的vue源码不是这样干的！！！
     createCompiler(el) {
         let childNodes = el.childNodes
         // 遍历所有子节点
