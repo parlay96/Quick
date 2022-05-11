@@ -1,8 +1,8 @@
 /*
  * @Author: penglei
  * @Date: 2022-05-04 08:27:23
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-11 13:29:30
+ * @LastEditors: penglei
+ * @LastEditTime: 2022-05-11 15:25:47
  * @Description: 
  */
 import Dep from "./dep"
@@ -85,7 +85,7 @@ export function observe(value) {
         return
     }
     let ob
-    // 如果存在，就不再new
+    // 如果存在，就不再new, 且对象 属于 ob实例
     if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
         ob = value.__ob__
     } else {
