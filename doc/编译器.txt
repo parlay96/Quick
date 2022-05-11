@@ -22,9 +22,9 @@ function render () {
 {return _c('div',[_c('h1',[_v("这是compiler")]),(message)?_c('p',[_v(_s(message))]):_c('p',[_v("No messageq.")])])}
 
 
-模板 -> 词法分析 -> 语法分析 -> 模板AST -> Transformer -> jsAST -> 代码生成
+v3 模板 -> 词法分析 -> 语法分析 -> 模板AST -> Transformer -> jsAST -> generate -> 渲染函数
 
-
+v2 模板 -> （词法分析， 语法分析） 模板AST ->  generate(Transformer在这里执行) -> 构建出来渲染函数！
 
 
 v-for： 

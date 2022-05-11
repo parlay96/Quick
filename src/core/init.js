@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-09 10:18:05
+ * @LastEditTime: 2022-05-11 13:48:28
  * @Description: 核心
  */
 import { observe } from "@/observer"
@@ -54,13 +54,12 @@ function initMethods(vm, methods) {
         // 方法是否为一个函数
         if (typeof methods[key] !== 'function') {
             console.error(
-                `Method "${key}" has type "${typeof methods[key]}" in the component definition. ` +
-                `Did you reference the function correctly?`
+                ` "${typeof methods[key]}" 不是一个函数 ` + `你正确引用函数了吗?`
             )
         }
         // 定义的方法名是否和data数据冲突
         if (data && hasOwn(data, key)) {
-            console.error(`Method "${key}" has already been defined as a prop`)
+            console.error(`方法 "${key}"已被定义为一个属性`)
         }
         if (typeof methods[key] == 'function') {
             vm[key] = methods[key]

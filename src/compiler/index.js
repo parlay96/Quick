@@ -3,7 +3,7 @@
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-09 10:50:24
+ * @LastEditTime: 2022-05-11 14:30:13
  * @Description: 核心
  */
 import { isTextNode, isElementNode, isDirective, isEvent, isBind } from "@/utils"
@@ -76,7 +76,14 @@ export default class Compiler {
             } else if (isEvent(attrName)) {
                 // 截取字符串的事件名，把@click去掉：@转为click
                 const eventName = attrName.substr(1)
-                this.onUpdater.call(this.vm, node, eventName, attrVal)
+                // 是否存在 等式 如： = ， 那么就需要吧等式转换！
+                if (attrVal.indexOf('=') !== -1) {
+                   let eventFn = new Function(`return this.${attrVal}`)
+                   // console.log(eventFn)
+                   node.addEventListener(eventName, eventFn.bind(this.vm))
+                } else {
+                   this.onUpdater.call(this.vm, node, eventName, attrVal)
+                }
                 // 删除节点上面的指令
                 node.removeAttribute('@' + eventName)
             }
@@ -154,6 +161,14 @@ export default class Compiler {
             node.setAttribute(key, newValue)
         })
     }
+    // 处理v-show
+    showUpdater(node, value, key) {
+      node.style.display= value ? 'block' : 'none'
+      // 给当前key属性绑定监听
+      new Watcher(this.vm, key, (newValue) => {
+        node.style.display= newValue ? 'block' : 'none'
+      })
+    }
     // 处理变量表达式
     compileText(node) {
         let reg = /\{\{(.+?)\}\}/g
@@ -175,17 +190,38 @@ export default class Compiler {
             variables.forEach(bras => {
                 // trim,删除字符串的头尾空白符  找出key，把括号干掉
                 let key = bras.substring(2, bras.length - 2)?.trim()
-                // 设置当前元素的值，把变量一个一个的替换，组成新的文本
-                value = value.replace(bras, this.vm[key])
+                let keys = key.split('.')
+                // 如果是对象
+                if (keys.length > 1) {
+                  let val = ''
+                  keys.forEach((item, index) => {
+                    val = index == 0 ? this.vm[item]: val[item] 
+                  })
+                  value = value.replace(bras, val)
+                } else {
+                  // 设置当前元素的值，把变量一个一个的替换，组成新的文本
+                  value = value.replace(bras, this.vm[key])
+                }
+
                 // 创建watcher对象，当数据改变更新视图
-                new Watcher(this.vm, key, (newValue) => {
+                new Watcher(this.vm, keys[0], (newValue) => {
                     let watchVal = text
                     // 更新完毕，再次取组成新的文本
                     variables.forEach(bras => {
                         // 找出key，把括号干掉
                         let key = bras.substring(2, bras.length - 2)?.trim()
-                        // 设置当前元素的值，把变量一个一个的替换，组成新的文本
-                        watchVal = watchVal.replace(bras, this.vm[key])
+                        let keys = key.split('.')
+                        // 如果是对象
+                        if (keys.length > 1) {
+                            let val = ''
+                            keys.forEach((item, index) => {
+                              val = index == 0 ? this.vm[item]: val[item] 
+                            })
+                            watchVal = watchVal.replace(bras, val)
+                        } else {
+                          // 设置当前元素的值，把变量一个一个的替换，组成新的文本
+                          watchVal = watchVal.replace(bras, this.vm[key])
+                        }
                     })
                     node.textContent = watchVal
                 })

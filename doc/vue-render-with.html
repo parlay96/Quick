@@ -1,0 +1,43 @@
+<!--
+ * @Author: pengLei
+ * @LastEditors: pengLei
+ * @Date: 2022-05-11 10:09:11
+ * @LastEditTime: 2022-05-11 11:14:09
+ * @motto: Still water run deep
+ * @Description: Modify here please
+ * @FilePath: \Quick\doc\vue-render-with.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-render-with</title>
+</head>
+<body>
+  <div>vue-loader 在打包编译出来的render是如何做到的！</div>
+</body>
+<script>
+  function vue () {
+    this._c = function (a, b) {
+      console.log(a, b)
+    }
+    this.name = '你好呀，鱼泡'
+    var _render = render.call(this)
+    console.log(_render)
+  }
+  // 通过在打包时候，generate函数生成
+  function render() {
+   var vm = this 
+   // 引用obj的方法或属性时可以省略obj.的输入而直接使用方法或属性的名称
+    with (vm) {
+      _c("div", [{name: '哈哈哈哈'}])
+      return name
+    }
+  }
+
+  vue()
+
+</script>
+</html>

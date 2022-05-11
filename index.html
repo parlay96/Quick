@@ -1,8 +1,8 @@
 <!--
  * @Author: penglei
  * @Date: 2022-05-03 13:45:45
- * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 22:44:54
+ * @LastEditors: pengLei
+ * @LastEditTime: 2022-05-11 14:31:44
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -45,20 +45,32 @@
 
 <body>
     <div id="app">
+        
         <p class="msg" v-text="message"></p>
         <p class="msg" v-html="price"></p>
+
         <p>
             <span v-bind:title="Tips">
                 鼠标悬停几秒钟查看此处动态绑定的提示信息！
             </span>
         </p>
+
         <div>
             <input v-model="title" type="number" />
             <li class="text"><span>请输入内容我会变化：{{ title }}</span></li>
         </div>
+
         <p>num值： {{ num }} ----拼接上： {{ content }} -----</p>
         <button class="btn" v-on:click="click">add 1</button>
-        <button class="btn" @click="clickTwo">add 2</button>
+        <button class="btn" @click="num += 2">add 2</button>
+        
+        <p>{{ item.message }}，，，， {{ content }}</p>
+        <button class="btn" @click="clickThree">改变对象</button>
+
+        <p>
+            <span v-show="show">我出现在你面前了！！！</span>
+            <button class="btn" @click="show = !this.show">点击我控制我显示隐藏</button>
+        </p>
     </div>
 </body>
 <script src="./lib/index.js"></script>
@@ -67,25 +79,27 @@
         el: '#app',
         data: function () {
             return {
-                message: 'Hello Vue !!!',
+                item: {message: '---------------李四------------'},
+                message: '-------------------------Hello Vue !!!-------------------------',
                 title: '100000',
                 Tips: '页面加载于 ' + new Date().toLocaleString(),
                 content: '鱼泡牛B ！！！',
                 price: `<span style="color:red">价格￥100</span>`,
-                num: 0
+                num: 0,
+                show: true
             }
         },
         created: function () {
             setTimeout(() => {
-                this.message = '欢迎你的到来！！！'
+                this.message = '-------------------------欢迎你的到来！！！-------------------------'
             }, 3000)
         },
         methods: {
             click(e) {
                 this.num += 1
             },
-            clickTwo(e) {
-                this.num += 2
+            clickThree(e) {
+                this.item = {message: '---------------张三------------'}
             }
         }
     })
