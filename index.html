@@ -1,8 +1,8 @@
 <!--
  * @Author: penglei
  * @Date: 2022-05-03 13:45:45
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-11 14:31:44
+ * @LastEditors: penglei
+ * @LastEditTime: 2022-05-11 15:50:27
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
 
 <body>
     <div id="app">
-        
+
         <p class="msg" v-text="message"></p>
         <p class="msg" v-html="price"></p>
 
@@ -63,7 +63,7 @@
         <p>num值： {{ num }} ----拼接上： {{ content }} -----</p>
         <button class="btn" v-on:click="click">add 1</button>
         <button class="btn" @click="num += 2">add 2</button>
-        
+
         <p>{{ item.message }}，，，， {{ content }}</p>
         <button class="btn" @click="clickThree">改变对象</button>
 
@@ -79,7 +79,9 @@
         el: '#app',
         data: function () {
             return {
-                item: {message: '---------------李四------------'},
+                item: {
+                    message: '---------------李四------------'
+                },
                 message: '-------------------------Hello Vue !!!-------------------------',
                 title: '100000',
                 Tips: '页面加载于 ' + new Date().toLocaleString(),
@@ -99,7 +101,9 @@
                 this.num += 1
             },
             clickThree(e) {
-                this.item = {message: '---------------张三------------'}
+                this.item = {
+                    message: '---------------张三------------'
+                }
             }
         }
     })
