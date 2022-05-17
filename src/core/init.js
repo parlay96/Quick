@@ -2,9 +2,11 @@
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-11 13:48:28
+ * @LastEditTime: 2022-05-17 17:46:25
  * @Description: 核心
  */
+
+import Watcher from "@/observer/watcher"
 import { observe } from "@/observer"
 import { isPlainObject, hasOwn } from "@/utils"
 
@@ -45,9 +47,11 @@ function initState(vm) {
         // data不存在，创建一个观察者    
         observe(vm._data = {})
     }
+    // 处理watch
+    if (opts.watch) initWatch(vm, opts.watch)
 }
 
-/** 处理方法 */
+/** 处理Methods方法 */
 function initMethods(vm, methods) {
     const data = vm.$options.data
     for (const key in methods) {
@@ -64,6 +68,17 @@ function initMethods(vm, methods) {
         if (typeof methods[key] == 'function') {
             vm[key] = methods[key]
         }
+    }
+}
+
+/** 处理Watch方法 */
+function initWatch (vm, watch) {
+    for (const key in watch) {
+      const handler = watch[key]
+      if (typeof handler === 'string') {
+        handler = vm[handler]
+      }
+      new Watcher(vm, key, handler)
     }
 }
 
@@ -87,8 +102,13 @@ export function initMixin(Quick) {
     Quick.prototype._init = function (options) {
         this.$options = options
         const vm = this
+        // 初始化状态
         initState(vm)
-        this._render.call(vm, vm)
+        // 执行created
         options?.created.call(vm)
+        // 挂载节点
+        this._render.call(vm, vm)
+        // 执行mounted
+        options?.mounted.call(vm)
     }
 }

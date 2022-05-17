@@ -1,8 +1,8 @@
 /*
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
- * @LastEditors: penglei
- * @LastEditTime: 2022-05-04 13:17:15
+ * @LastEditors: pengLei
+ * @LastEditTime: 2022-05-17 10:04:01
  * @Description: 核心
  */
 const path = require('path')
@@ -16,7 +16,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(process.cwd(), './lib'),
-        filename: 'index.js',
+        filename: 'quick.min.js',
         chunkFilename: '[id].js',
         libraryTarget: 'umd',
         libraryExport: 'default',

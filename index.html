@@ -1,8 +1,8 @@
 <!--
  * @Author: penglei
  * @Date: 2022-05-03 13:45:45
- * @LastEditors: penglei
- * @LastEditTime: 2022-05-11 15:50:27
+ * @LastEditors: pengLei
+ * @LastEditTime: 2022-05-17 17:57:52
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -64,7 +64,7 @@
         <button class="btn" v-on:click="click">add 1</button>
         <button class="btn" @click="num += 2">add 2</button>
 
-        <p>{{ item.message }}，，，， {{ content }}</p>
+        <p>{{ item.message }}</p>
         <button class="btn" @click="clickThree">改变对象</button>
 
         <p>
@@ -73,7 +73,7 @@
         </p>
     </div>
 </body>
-<script src="./lib/index.js"></script>
+<script src="./lib/quick.min.js"></script>
 <script>
     new Quick({
         el: '#app',
@@ -94,17 +94,35 @@
         created: function () {
             setTimeout(() => {
                 this.message = '-------------------------欢迎你的到来！！！-------------------------'
-            }, 3000)
+            }, 2000)
+        },
+        mounted: function () {
+            this.mountedFn()
         },
         methods: {
+            // 修改content
+            mountedFn() {
+                setTimeout(() => {
+                    this.content = '鱼泡牛B，鱼泡牛B，鱼泡牛B！！！'  
+                }, 3000)
+            },
+            // 点击叠加
             click(e) {
                 this.num += 1
             },
+            // 修改对象
             clickThree(e) {
-                this.item = {
-                    message: '---------------张三------------'
-                }
+                this.item.message = '---------------张三------------'
             }
+        },
+        // 监听变化
+        watch: {
+            'item.message': function (newValue, oldValue) {
+                console.log(newValue, oldValue)
+            },
+            num: function (newValue, oldValue) {
+                console.log(newValue, oldValue)
+            },
         }
     })
 </script>

@@ -3,10 +3,10 @@
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-11 14:30:13
+ * @LastEditTime: 2022-05-17 16:12:31
  * @Description: 核心
  */
-import { isTextNode, isElementNode, isDirective, isEvent, isBind } from "@/utils"
+import { isTextNode, isElementNode, isDirective, isEvent, isBind, parsePath } from "@/utils"
 import Watcher from "@/observer/watcher"
 
 // 编译器
@@ -186,42 +186,25 @@ export default class Compiler {
             // 比如：<p>{{ a }} 哈哈哈哈  {{ b }}</p>！！！
             // 那么我需要去获取a的值，然后把p标签下面的内容 {{ a }} 替换 为 a变量的值！！！
 
-            // 匹配花括号所有的变量：variables == ['{{ a }}', '{{ b }}']
+            // 匹配花括号所有的变量：variables == ['{{ a }}', '{{ b.c }}']
             variables.forEach(bras => {
                 // trim,删除字符串的头尾空白符  找出key，把括号干掉
                 let key = bras.substring(2, bras.length - 2)?.trim()
-                let keys = key.split('.')
-                // 如果是对象
-                if (keys.length > 1) {
-                  let val = ''
-                  keys.forEach((item, index) => {
-                    val = index == 0 ? this.vm[item]: val[item] 
-                  })
-                  value = value.replace(bras, val)
-                } else {
-                  // 设置当前元素的值，把变量一个一个的替换，组成新的文本
-                  value = value.replace(bras, this.vm[key])
-                }
-
+                // 解析表达式
+                let getter = parsePath(key)
+                // 获取当前表达是的值
+                value = value.replace(bras, getter.call(this.vm, this.vm))
                 // 创建watcher对象，当数据改变更新视图
-                new Watcher(this.vm, keys[0], (newValue) => {
+                new Watcher(this.vm, key, (newValue, oldValue) => {
                     let watchVal = text
                     // 更新完毕，再次取组成新的文本
                     variables.forEach(bras => {
-                        // 找出key，把括号干掉
+                        // trim,删除字符串的头尾空白符  找出key，把括号干掉
                         let key = bras.substring(2, bras.length - 2)?.trim()
-                        let keys = key.split('.')
-                        // 如果是对象
-                        if (keys.length > 1) {
-                            let val = ''
-                            keys.forEach((item, index) => {
-                              val = index == 0 ? this.vm[item]: val[item] 
-                            })
-                            watchVal = watchVal.replace(bras, val)
-                        } else {
-                          // 设置当前元素的值，把变量一个一个的替换，组成新的文本
-                          watchVal = watchVal.replace(bras, this.vm[key])
-                        }
+                        // 解析表达式
+                        let watchGetter = parsePath(key)
+                        // 设置当前元素的值，把变量一个一个的替换，组成新的文本
+                        watchVal = watchVal.replace(bras, watchGetter.call(this.vm, this.vm))
                     })
                     node.textContent = watchVal
                 })
