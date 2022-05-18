@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-18 16:37:14
+ * @LastEditTime: 2022-05-18 17:23:55
  * @Description: 核心
  */
 
@@ -47,6 +47,8 @@ function initState(vm) {
         // data不存在，创建一个观察者    
         observe(vm._data = {})
     }
+    // 处理计算属性
+    if (opts.computed) initComputed(vm, opts.computed)
     // 处理watch
     if (opts.watch) initWatch(vm, opts.watch)
 }
@@ -72,13 +74,13 @@ function initMethods(vm, methods) {
 }
 
 /** 处理Watch方法 */
-function initWatch (vm, watch) {
+function initWatch(vm, watch) {
     for (const key in watch) {
-      const handler = watch[key]
-      if (typeof handler === 'string') {
-        handler = vm[handler]
-      }
-      new Watcher(vm, key, handler)
+        const handler = watch[key]
+        if (typeof handler === 'string') {
+            handler = vm[handler]
+        }
+        new Watcher(vm, key, handler)
     }
 }
 
