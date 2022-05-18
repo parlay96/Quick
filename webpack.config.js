@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-17 10:04:01
+ * @LastEditTime: 2022-05-18 15:32:47
  * @Description: 核心
  */
 const path = require('path')
@@ -27,6 +27,9 @@ module.exports = {
         extensions: ['.js', '.vue', '.json'],
         alias: { '@': path.resolve(__dirname, './src') },
         modules: ['node_modules']
+    },
+    optimization: {
+        minimize: true,
     },
     module: {
         rules: [{

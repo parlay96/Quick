@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-04 12:09:35
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-17 17:44:06
+ * @LastEditTime: 2022-05-18 16:41:58
  * @Description: 
  */
 import { pushTarget, popTarget } from './dep'
@@ -45,7 +45,7 @@ export default class Watcher {
     // 调度程序作业界面
     run() {
         // 获取新的值
-        let newValue = this.get()
+        let newValue = this.getter.call(this.vm, this.vm)
         // 与旧值做比较，如果没有改变就无需执行下一步
         if (newValue === this.oldValue || _isNaN(newValue, this.oldValue)) return
         // 把新的值回调出去

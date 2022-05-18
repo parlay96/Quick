@@ -2,7 +2,7 @@
  * @Author: penglei
  * @Date: 2022-05-03 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-17 17:46:25
+ * @LastEditTime: 2022-05-18 16:37:14
  * @Description: 核心
  */
 
@@ -105,10 +105,10 @@ export function initMixin(Quick) {
         // 初始化状态
         initState(vm)
         // 执行created
-        options?.created.call(vm)
+        options?.created?.call(vm)
         // 挂载节点
         this._render.call(vm, vm)
         // 执行mounted
-        options?.mounted.call(vm)
+        options?.mounted?.call(vm)
     }
 }
