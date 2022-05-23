@@ -1,9 +1,9 @@
 
 /*
  * @Author: penglei
- * @Date: 2022-05-03 16:55:52
+ * @Date: 2022-05-22 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 11:41:34
+ * @LastEditTime: 2022-05-23 13:55:53
  * @Description: 核心
  */
 import { isTextNode, isElementNode, isDirective, isEvent, isBind, parsePath } from "@/utils"
@@ -26,7 +26,7 @@ export default class Compiler {
   // (3) 无key – 就地更新 / 有key – 按key比较!!
 
   // 3.5 利用diff算法，找出不同，然后更新变化的部分重绘到页面，也叫做打补丁!!
-    
+
   // 3.6 重绘和回流的概念
   // 回流(重排): 当浏览器必须重新处理和绘制部分或全部页面时，回流就会发生。
   // 重绘: 不影响布局, 只是标签页面发生变化, 重新绘制。
@@ -72,7 +72,7 @@ export default class Compiler {
         // 截取属性名，把v-去掉：v-text转为text
         attrName = attrName.substr(2)
         this.update(node, attrVal, attrName)
-        // 是否以@开头的事件  
+        // 是否以@开头的事件
       } else if (isEvent(attrName)) {
         // 截取字符串的事件名，把@click去掉：@转为click
         const eventName = attrName.substr(1)
@@ -90,9 +90,9 @@ export default class Compiler {
     })
   }
   /**
-     * @param {*节点dom} node 
+     * @param {*节点dom} node
      * @param {*值} attrVal 指令值 | 变量名
-     * @param {*attrName属性} 指令名 
+     * @param {*attrName属性} 指令名
      */
   update (node, attrVal, attrName) {
     // 处理事件 startsWith查看字符串是否以xx开头

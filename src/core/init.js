@@ -1,8 +1,8 @@
 /*
  * @Author: penglei
- * @Date: 2022-05-03 16:55:52
+ * @Date: 2022-05-22 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 11:41:29
+ * @LastEditTime: 2022-05-23 13:55:44
  * @Description: 核心
  */
 
@@ -17,9 +17,10 @@ const sharedPropertyDefinition = {
   // value: 设置属性的值
   // writable: 值是否可以重写。true | false
   // set: 目标属性设置值的方法
-  // get：目标属性获取值的方法 
+  // get：目标属性获取值的方法
 }
 
+// 初始化状态
 function initState (vm) {
   const opts = vm.$options
   // 处理事件
@@ -44,7 +45,7 @@ function initState (vm) {
     }
     observe(data)
   } else {
-    // data不存在，创建一个观察者    
+    // data不存在，创建一个观察者
     observe(vm._data = {})
   }
   // 处理计算属性

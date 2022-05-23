@@ -1,9 +1,9 @@
 /*
  * @Author: penglei
- * @Date: 2022-05-04 09:00:12
+ * @Date: 2022-05-22 09:00:12
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 11:49:40
- * @Description: 
+ * @LastEditTime: 2022-05-23 13:56:53
+ * @Description:
  */
 /** 为对象添加某个属性 */
 export const def = (obj, key, val, enumerable) => {
@@ -17,7 +17,7 @@ export const def = (obj, key, val, enumerable) => {
 
 /**
  * @name 解析字符串
- * 
+ *
  * 如果key是一个字符串，或者表达字符：a.b.c
  * 那么就需要去解析它
  */

@@ -1,8 +1,8 @@
 /*
  * @Author: penglei
- * @Date: 2022-05-04 09:59:39
+ * @Date: 2022-05-22 09:59:39
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 11:41:25
+ * @LastEditTime: 2022-05-23 13:56:17
  * @Description: dep是订阅器|收集者 负责存放watcher
  */
 import { remove } from '@/utils'
@@ -36,7 +36,7 @@ export default class Dep {
 }
 
 /**
- *  target === watcher 
+ *  target === watcher
  *  把当前的target这是为观察者
 */
 Dep.target = null
