@@ -49,6 +49,10 @@
             <span v-bind:title="Tips">
                 鼠标悬停几秒钟查看此处动态绑定的提示信息！
             </span>
+            <br/>
+            <span :title="Tips">
+              鼠标悬停几秒钟查看此处动态绑定的提示信息！
+            </span>
         </p>
 
         <div>
@@ -99,7 +103,7 @@
             // 修改content
             mountedFn() {
                 setTimeout(() => {
-                    this.content = '鱼泡牛B，鱼泡牛B，鱼泡牛B！！！'
+                    this.content = `鱼泡牛B，鱼泡牛B，${this.Tips}！！！`
                 }, 3000)
             },
             // 点击叠加
