@@ -18,12 +18,12 @@ module.exports = {
     umdNamedDefine: true,
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js'],
     alias: { '@': path.resolve(__dirname, './src') },
     modules: ['node_modules']
   },
   optimization: {
-    minimize: true,
+    minimize: false,
   },
   module: {
     rules: [{

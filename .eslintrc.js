@@ -1,12 +1,4 @@
-/*
- * @Author: pengLei
- * @LastEditors: pengLei
- * @Date: 2022-05-22 11:14:13
- * @LastEditTime: 2022-05-23 13:57:06
- * @motto: Still water run deep
- * @Description: Modify here please
- * @FilePath: \Quick\.eslintrc.js
- */
+
 module.exports = {
   extends: ['eslint:recommended'],
   env: {
