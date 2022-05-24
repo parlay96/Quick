@@ -1,10 +1,4 @@
-/*
- * @Author: penglei
- * @Date: 2022-05-22 09:00:12
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 13:56:53
- * @Description:
- */
+
 /** 为对象添加某个属性 */
 export const def = (obj, key, val, enumerable) => {
   Object.defineProperty(obj, key, {

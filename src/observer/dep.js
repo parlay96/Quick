@@ -1,10 +1,4 @@
-/*
- * @Author: penglei
- * @Date: 2022-05-22 09:59:39
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-22 10:55:20
- * @Description: dep是订阅器|收集者 负责存放watcher
- */
+
 import { remove } from '@/utils'
 
 let uid = 0

@@ -1,10 +1,3 @@
-/*
- * @Author: penglei
- * @Date: 2022-05-22 16:26:56
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 13:56:48
- * @Description: 工具
- */
 
 const _toString = Object.prototype.toString
 

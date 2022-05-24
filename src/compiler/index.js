@@ -1,11 +1,4 @@
 
-/*
- * @Author: penglei
- * @Date: 2022-05-21 16:55:52
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-22 10:54:56
- * @Description: 核心
- */
 import { isTextNode, isElementNode, isDirective, isEvent, isBind, parsePath } from "@/utils"
 import Watcher from "@/observer/watcher"
 

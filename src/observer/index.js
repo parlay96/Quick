@@ -1,10 +1,3 @@
-/*
- * @Author: penglei
- * @Date: 2022-05-22 08:27:23
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-22 10:55:27
- * @Description:
- */
 import Dep from "./dep"
 import { hasOwn, def, isPlainObject } from "@/utils"
 

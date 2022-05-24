@@ -1,12 +1,4 @@
 
-/*
- * @Author: penglei
- * @Date: 2022-05-22 9:55:52
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-22 10:55:11
- * @Description: 核心
- */
-
 import { initMixin } from './init'
 import { renderMixin } from './render'
 

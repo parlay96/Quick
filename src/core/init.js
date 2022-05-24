@@ -1,10 +1,3 @@
-/*
- * @Author: penglei
- * @Date: 2022-05-22 16:55:52
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 13:55:44
- * @Description: 核心
- */
 
 import Watcher from "@/observer/watcher"
 import { observe } from "@/observer"

@@ -1,10 +1,4 @@
-/*
- * @Author: penglei
- * @Date: 2022-05-22 12:09:35
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 13:56:43
- * @Description:
- */
+
 import { pushTarget, popTarget } from './dep'
 import { _isNaN, parsePath } from "@/utils"
 

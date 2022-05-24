@@ -1,10 +1,4 @@
-/*
- * @Author: penglei
- * @Date: 2022-05-22 16:55:52
- * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 13:58:46
- * @Description: 核心
- */
+
 const path = require('path')
 const webpack = require('webpack')
 
