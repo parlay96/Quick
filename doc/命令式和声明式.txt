@@ -2,7 +2,7 @@
  $("#app")
   .text("hello world")
   .on('click', () => { console.log('点我干嘛')  }) !!!!
- 
+
 2. ⭐如果你没有用过JQ?  在看看原生
  var div = document.querySelector("#app")
  div.innerHTML = 'hello world'
@@ -33,6 +33,23 @@
 
 ⭐ 而框架设计者要做的就是：在保持可维护性的同时让性能损失最小
 
+
+
+
+
+
+
+
+
+
+
+diff 算法的时间复杂度
+
+两个数的完全的 diff 算法是一个时间复杂度为 o(n3)，
+Vue 进行了优化 O(n3)复杂度的问题转换成 O(n)复杂度的问题(只比较同级不考虑跨级问题)
+Virtual Dom 只会对同一个层级地元素进行对比
+
+O(1) < O(logn) < O(n) < O(n^3)，越往右越差，最左最好，是常量
 
 
 
