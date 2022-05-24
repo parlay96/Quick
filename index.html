@@ -61,7 +61,7 @@
         </div>
 
         <p>num值： {{ num }} ----拼接上： {{ content }} -----</p>
-        <button class="btn" v-on:click="click">add 1</button>
+        <button class="btn" v-on:click="click">reduce 1</button>
         <button class="btn" @click="num += 2">add 2</button>
 
         <p>{{ item.message }}</p>
@@ -108,7 +108,7 @@
             },
             // 点击叠加
             click(e) {
-                this.num += 1
+                this.num -= 1
             },
             // 修改对象
             clickThree(e) {
