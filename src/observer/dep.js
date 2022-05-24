@@ -2,13 +2,14 @@
  * @Author: penglei
  * @Date: 2022-05-22 09:59:39
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 13:56:17
+ * @LastEditTime: 2022-05-24 10:28:53
  * @Description: dep是订阅器|收集者 负责存放watcher
  */
 import { remove } from '@/utils'
 
 let uid = 0
 
+// Dep作为消息中心，用来管理Observer与Watcher之间的消息传递
 export default class Dep {
     static target;
     constructor () {
@@ -37,7 +38,7 @@ export default class Dep {
 
 /**
  *  target === watcher
- *  把当前的target这是为观察者
+ *  把当前的target这是为订阅者
 */
 Dep.target = null
 

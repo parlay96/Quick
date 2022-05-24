@@ -3,7 +3,7 @@
  * @Author: penglei
  * @Date: 2022-05-22 16:55:52
  * @LastEditors: pengLei
- * @LastEditTime: 2022-05-23 13:55:53
+ * @LastEditTime: 2022-05-24 09:28:29
  * @Description: 核心
  */
 import { isTextNode, isElementNode, isDirective, isEvent, isBind, parsePath } from "@/utils"
@@ -18,7 +18,9 @@ export default class Compiler {
     this.createCompiler(this.el)
   }
   // 1. 模拟处理模板。真实的vue源码不是这样干的！！！
-  // 真实情况，是通过mount-phase执行一个_update 。然后_update接受一个_render方法（就是获取虚拟dom）参数！！！
+  //!! 真实情况:
+  // 1.1 render-phase：渲染模块使用渲染函数根据初始化数据生成虚拟Dom
+  // 1.2 是通过mount-phase执行一个_update 。然后_update接受一个_render方法（就是获取虚拟dom）参数！！！
   // 2. _update方法在里面执行一个patch方法。patch方法接受一个_render方法（就是获取虚拟dom）参数，吧虚拟的dom转为真实dom
   // 3. patch（打补丁）里面做了diff算法
   // (1) 根元素改变 – 删除当前DOM树重新建!!
@@ -37,7 +39,7 @@ export default class Compiler {
   // mount-phase ： 利用虚拟dom创建视图页面html
   // patch-phase：数据模型一旦变化渲染函数将再次被调用生成新的虚拟dom，然后做dom diff更新视图html
 
-  // 编译模板，处理文本节点和元素节点！！！
+  //!! 编译模板，处理文本节点和元素节点！！！
   createCompiler (el) {
     let childNodes = el.childNodes
     // 遍历所有子节点

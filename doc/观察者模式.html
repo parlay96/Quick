@@ -1,0 +1,78 @@
+<!--
+ * @Author: pengLei
+ * @LastEditors: pengLei
+ * @Date: 2022-05-24 10:41:26
+ * @LastEditTime: 2022-05-24 10:48:20
+ * @motto: Still water run deep
+ * @Description: Modify here please
+ * @FilePath: \Quick\doc\观察者模式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>观察者模式</title>
+</head>
+
+<body>
+  <!-- 观察者模式:
+    定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。
+  优点
+   观察者和被观察者是抽象耦合的。
+   建立一套触发机制。
+
+  发布-订阅模式在很多文章中都被认为成观察者模式，包括在《Javascript设计模式与开发实践》一书中，作者表示
+     发布-订阅模式又叫观察者模式
+
+  经过考察二者在是实现上还是有些区别，但是能确定发布-订阅模式是观察者模式的一种变体。
+
+   发布/订阅模式和观察者最大的差别就在于消息是否通过一个中间类进行转发。 -->
+</body>
+<script>
+  // 被观察对象
+  class Subject {
+    constructor() {
+      /** 消息事件观察者集合对象 */
+      this.subs = []
+    }
+    // 添加观察者
+    add(observer) {
+      this.subs.push(observer)
+    }
+    // 通知观察者
+    notify() {
+      var subs = this.subs
+      var len = subs.length
+      for (var i = 0; i < len; i++) {
+        subs[i].update()
+      }
+    }
+  }
+
+  // 观察者
+  class Observer {
+    constructor(name) {
+      this.name = name
+    }
+    // 观察者监听到变化后要处理的逻辑
+    update() {
+      console.log('被通知了---我是观察者：', this.name)
+    }
+  }
+
+  const subject = new Subject()
+
+  const zhangsan = new Observer('张三')
+
+  const lisi = new Observer('李四')
+  // 添加观察者
+  subject.add(zhangsan)
+  subject.add(lisi)
+  // 发布消息
+  subject.notify()
+</script>
+
+</html>

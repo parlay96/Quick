@@ -14,7 +14,7 @@ function render () {
 
 如：
 <div>
-    <h1>这是compiler</h1>  
+    <h1>这是compiler</h1>
 	 <p v-if="message">{{ message }}</p>
 	 <p v-else>No messageq.</p>
 </div>
@@ -27,10 +27,22 @@ v3 模板 -> 词法分析 -> 语法分析 -> 模板AST -> Transformer -> jsAST -
 v2 模板 -> （词法分析， 语法分析） 模板AST ->  generate(Transformer在这里执行) -> 构建出来渲染函数！
 
 
-v-for： 
+v-for：
 //  模板字符串 -> AST(Abstract Syntax Treee)抽象语法树
 let ast = parse(template)
 // 转换处理 譬如 v-bind v-if v-for的转换
 ast = transfer(ast)
 // AST -> 渲染函数
 return generator(ast)
+
+
+// react
+<h1 id="title" className="bg">
+     hello
+     <span>world</span>
+</h1>
+
+React.createElement("h1", {
+  id: "title",
+  className: "bg",
+}, "hello", React.createElement("span", null, "world"))
