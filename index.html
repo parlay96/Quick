@@ -30,7 +30,9 @@
         p {
             font-size: 28px;
         }
-
+         li {
+           margin-bottom: 20px;
+         }
         .btn {
             cursor: pointer;
         }
@@ -41,7 +43,7 @@
     <div id="app">
 
         <p class="msg" v-text="message"></p>
-        <p class="msg" v-html="price"></p>
+        <p class="msg" v-html="money"></p>
 
         <p>
             <span v-bind:title="Tips">
@@ -50,8 +52,8 @@
         </p>
 
         <div>
-            <input v-model="title" type="number" />
-            <li class="text"><span>请输入内容我会变化：{{ title }}</span></li>
+            <input v-model="price" type="number" />
+            <li class="text"><span>请输入内容我会变化：{{ price }}</span></li>
         </div>
 
         <p>num值： {{ num }} ----拼接上： {{ content }} -----</p>
@@ -77,10 +79,10 @@
                     message: '---------------李四------------'
                 },
                 message: '-------------------------Hello Vue !!!-------------------------',
-                title: '100000',
+                price: '100000',
                 Tips: '页面加载于 ' + new Date().toLocaleString(),
                 content: '鱼泡牛B ！！！',
-                price: `<span style="color:red">价格￥100</span>`,
+                money: `<span style="color:red">价格￥100</span>`,
                 num: 0,
                 show: true
             }
