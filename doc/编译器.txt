@@ -3,13 +3,13 @@
 // 源代码
 <template>
    <div @click="clickChange">
-      你好呀，鱼泡
+      你好呀，阿里
    </div>
 </template>
 
 // 目标代码
 function render () {
-  return h('div', {onClick: clickChange }, '你好呀，鱼泡')
+  return h('div', {onClick: clickChange }, '你好呀，阿里')
 }
 
 如：

@@ -4,7 +4,7 @@ var virtualNode = {
   props: {
     onClick: () => console.log('点我, 干嘛！！！')
   },
-  children: '你好呀，鱼泡'
+  children: '你好呀，阿里'
 }
 
 var virtualNode2 = {
@@ -14,11 +14,11 @@ var virtualNode2 = {
   },
   children: [
     {
-      tag: 'h1', 
+      tag: 'h1',
       children: '我是h1标签哦！！！'
     },
     {
-      tag: 'a', 
+      tag: 'a',
       children: '我是a标签哦！！！'
     },
   ]
@@ -38,9 +38,9 @@ function renderer (vnode, container) {
       )
     }
   }
-  // 正常来说，这里还有很多逻辑，有patch方法，里面有大量的diff算法。新旧节点比较！！！ 
+  // 正常来说，这里还有很多逻辑，有patch方法，里面有大量的diff算法。新旧节点比较！！！
   // patch是渲染器的核心
-  
+
   // 处理children
   if (typeof vnode.children === 'string') {
     // 说明他是文本的子节点！！！

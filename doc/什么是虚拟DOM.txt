@@ -8,14 +8,14 @@ import { h } from "vue"
 // 第一种通过h函数描述UI
 export default {
     render () {
-        return h('h1', {onClick: clickChange }, '你好呀，鱼泡') // 虚拟dom  h函数就是一个创建虚拟dom的工具
+        return h('h1', {onClick: clickChange }, '你好呀，阿里') // 虚拟dom  h函数就是一个创建虚拟dom的工具
     }
 }
 
 // 第二种：模板创建 template 通过一个（vue-loader解析）
 <template>
    <div @click="clickChange">
-      你好呀，鱼泡
+      你好呀，阿里
    </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
 
 1. 其中 template的模板内容，在编译器会把模板内容编译成渲染函数，并添加到script标签上
 render () {
-  return h('div', {onClick: clickChange }, '你好呀，鱼泡') // 虚拟dom  h函数就是一个创建虚拟dom的工具
+  return h('div', {onClick: clickChange }, '你好呀，阿里') // 虚拟dom  h函数就是一个创建虚拟dom的工具
  }
 
  1. ⭐然后渲染器再把渲染函数返回的虚拟DOM，渲染为真实的DOM
@@ -43,7 +43,7 @@ var virtualNode = {
   props: {
       onClick:() => console.log('点我, 干嘛！！！')
   },
-  children: '你好呀，鱼泡'
+  children: '你好呀，阿里'
 }
 
 接下来：我们需要写一个渲染器，把上面的虚拟DOM转换为真实的DOM
@@ -62,8 +62,8 @@ function renderer (vnode, container) {
         )
      }
    }
-   
-  // 正常来说，这里还有很多逻辑，有patch方法，里面有大量的diff算法。新旧节点比较！！！ 
+
+  // 正常来说，这里还有很多逻辑，有patch方法，里面有大量的diff算法。新旧节点比较！！！
   // patch是渲染器的核心
 
   // 处理children
@@ -77,11 +77,10 @@ function renderer (vnode, container) {
   }
   // 将元素挂在到容器下
   container.appendChild(el)
-}   
+}
 
 
 // 别忘了我们现在所做的还仅仅是创建节点。渲染器的精髓是在更新节点的。比如我们修改了vnode，
 
 对于渲染器来说。他需要精确的找到vnode对象来更新内容！而不是在完整的创建元素的流程！
 
-  
