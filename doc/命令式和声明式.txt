@@ -16,11 +16,11 @@
 
 
 4. ⭐ 引发的争议：命令式 和 声明式谁的性能更好？
- 1. 假设现在我们将div标签的内容修改为 "hello yupao"!!!  那么命令式就是： div.textContent = 'hello yupao'
+ 1. 假设现在我们将div标签的内容修改为 "hello ali"!!!  那么命令式就是： div.textContent = 'hello ali'
 
- 2. 声明式：<div @click="() => console.log('点我干嘛')">hello yupao</div>
+ 2. 声明式：<div @click="() => console.log('点我干嘛')">hello ali</div>
 
-对于框架来说：它需要找到前后的差异，并只更新变化的地方！但是它最终完成更新的代码任然是： div.textContent = 'hello yupao'
+对于框架来说：它需要找到前后的差异，并只更新变化的地方！但是它最终完成更新的代码任然是： div.textContent = 'hello ali'
 
 如何我们吧直接修改的性能消耗定义为A, 找出差异的性能消耗定义为B, 那么
 1. 命令式的代码更新 = A
